@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="paper" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#1d2433" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#1d2433" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#f6f1e3"/>
+  <rect width="1200" height="630" fill="url(#paper)"/>
+
+  <g font-family="ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" fill="#1d2433">
+    <rect x="80" y="96" width="84" height="84" rx="22" fill="#1f6feb"/>
+    <path d="M140 116h-36l18 22-18 22h36" fill="none" stroke="#fffdf7" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="80" y="290" font-size="112" font-weight="800" letter-spacing="-3">Solve<tspan fill="#1f6feb">Sum</tspan></text>
+    <text x="84" y="358" font-size="38" font-weight="600" fill="#4b5563">Swap tiles. Match the sums.</text>
+    <text x="84" y="408" font-size="38" font-weight="600" fill="#4b5563">Clear the lines.</text>
+    <rect x="84" y="468" width="300" height="64" rx="32" fill="#1f6feb"/>
+    <text x="234" y="511" font-size="30" font-weight="700" fill="#ffffff" text-anchor="middle">New puzzle daily</text>
+  </g>
+
+  <g transform="translate(640 70)" font-family="ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" text-anchor="middle">
+    <rect x="-24" y="-24" width="532" height="532" rx="36" fill="#fffdf7" stroke="#e4dcc6" stroke-width="2" filter="url(#sh)"/>
+    <g font-size="34">
+      <!-- column targets -->
+      <rect x="104" y="8" width="88" height="88" rx="24" fill="#dde9fb"/><text x="148" y="64" fill="#1f6feb">17</text>
+      <rect x="200" y="8" width="88" height="88" rx="24" fill="#f5c542"/><text x="244" y="64" fill="#1d2433">−4</text>
+      <rect x="296" y="8" width="88" height="88" rx="24" fill="#dde9fb"/><text x="340" y="64" fill="#1f6feb">9</text>
+      <rect x="392" y="8" width="88" height="88" rx="24" fill="#dde9fb"/><text x="436" y="64" fill="#1f6feb">22</text>
+      <!-- row targets -->
+      <rect x="8" y="104" width="88" height="88" rx="24" fill="#dde9fb"/><text x="52" y="160" fill="#1f6feb">12</text>
+      <rect x="8" y="200" width="88" height="88" rx="24" fill="#dde9fb"/><text x="52" y="256" fill="#1f6feb">−7</text>
+      <rect x="8" y="296" width="88" height="88" rx="24" fill="#dde9fb"/><text x="52" y="352" fill="#1f6feb">3</text>
+      <rect x="8" y="392" width="88" height="88" rx="24" fill="#dde9fb"/><text x="52" y="448" fill="#1f6feb">15</text>
+    </g>
+    <g font-size="36" stroke="#d9d1bb" stroke-width="2">
+      <rect x="104" y="104" width="88" height="88" rx="28" fill="#8fd4a8"/>
+      <rect x="200" y="104" width="88" height="88" rx="28" fill="#f5c542"/>
+      <rect x="296" y="104" width="88" height="88" rx="28" fill="#f3b0b0"/>
+      <rect x="392" y="104" width="88" height="88" rx="28" fill="#c9ebd5"/>
+      <rect x="104" y="200" width="88" height="88" rx="28" fill="#ee8f8f"/>
+      <rect x="200" y="200" width="88" height="88" rx="28" fill="#f5c542"/>
+      <rect x="296" y="200" width="88" height="88" rx="28" fill="#ffffff"/>
+      <rect x="392" y="200" width="88" height="88" rx="28" fill="#6cc68d"/>
+      <rect x="104" y="296" width="88" height="88" rx="28" fill="#dff3e6"/>
+      <rect x="200" y="296" width="88" height="88" rx="28" fill="#f5c542"/>
+      <rect x="296" y="296" width="88" height="88" rx="28" fill="#bfe0f5" stroke="#1f6feb" stroke-width="4"/>
+      <rect x="392" y="296" width="88" height="88" rx="28" fill="#f7c9c9"/>
+      <rect x="104" y="392" width="88" height="88" rx="28" fill="#f7c9c9"/>
+      <rect x="200" y="392" width="88" height="88" rx="28" fill="#f5c542"/>
+      <rect x="296" y="392" width="88" height="88" rx="28" fill="#a7dcba"/>
+      <rect x="392" y="392" width="88" height="88" rx="28" fill="#e57373"/>
+    </g>
+    <g font-size="36" fill="#1d2433">
+      <text x="148" y="161">14</text><text x="244" y="161">−9</text><text x="340" y="161">−6</text><text x="436" y="161">5</text>
+      <text x="148" y="257">−19</text><text x="244" y="257">3</text><text x="340" y="257">0</text><text x="436" y="257">18</text>
+      <text x="148" y="353">2</text><text x="244" y="353">−1</text><text x="340" y="353">7</text><text x="436" y="353">−5</text>
+      <text x="148" y="449">−4</text><text x="244" y="449">3</text><text x="340" y="449">11</text><text x="436" y="449">−22</text>
+    </g>
+    <text x="244" y="-34" font-size="30" fill="#c2410c">+10</text>
+  </g>
+</svg>

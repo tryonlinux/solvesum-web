@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="SolveSum">
+  <rect width="128" height="128" rx="28" fill="#1f6feb"/>
+  <g font-family="ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" font-size="22" text-anchor="middle">
+    <rect x="16" y="16" width="30" height="30" rx="9" fill="#fffdf7" opacity="0.28"/>
+    <rect x="49" y="16" width="30" height="30" rx="9" fill="#dde9fb"/>
+    <rect x="82" y="16" width="30" height="30" rx="9" fill="#dde9fb"/>
+    <rect x="16" y="49" width="30" height="30" rx="9" fill="#dde9fb"/>
+    <rect x="49" y="49" width="30" height="30" rx="9" fill="#f5c542"/>
+    <rect x="82" y="49" width="30" height="30" rx="9" fill="#f5c542"/>
+    <rect x="16" y="82" width="30" height="30" rx="9" fill="#dde9fb"/>
+    <rect x="49" y="82" width="30" height="30" rx="9" fill="#e35d5d"/>
+    <rect x="82" y="82" width="30" height="30" rx="9" fill="#4cc27a"/>
+  </g>
+  <path d="M38 23H24l8 8-8 8h14" fill="none" stroke="#fffdf7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

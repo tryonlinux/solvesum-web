@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node / tooling
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.npm/
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+.dev.vars.*
+dist/
+
+# Secrets & env
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
