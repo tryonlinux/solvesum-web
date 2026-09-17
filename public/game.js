@@ -166,7 +166,17 @@
       }
       if (t !== current) return t;
     }
-    // Only reached when the nearby tiles all match this line's.
+    // The nearby tiles all match this line's: use one straight slide from any distance.
+    const slides = [];
+    for (let pos = 0; pos < n; pos++) {
+      for (let j = 0; j < n; j++) {
+        const d = at(j, pos) - at(i, pos);
+        if (d) slides.push(d);
+      }
+    }
+    if (slides.length) return current + slides[randInt(rng, 0, slides.length - 1)];
+    // Every crossing line is constant, so no swap can change this sum; the
+    // target only becomes solvable once another line refreshes or the player shuffles.
     return current + randInt(rng, 1, n) * (rng() < 0.5 ? -1 : 1);
   }
 
@@ -298,6 +308,7 @@
   let selected = null;
   let focusIdx = 0;
   let busy = false;
+  let epoch = 0; // bumped whenever a different board loads, so stale timers bail out
   let lastFinish = {};
   let newSize = clamp(Number(store.get('lastSize', 6)) || 6, MIN_N, MAX_N);
 
@@ -306,13 +317,18 @@
     store.set('current', game.id);
     const recent = store.get('games', []).filter((x) => x !== game.id);
     recent.unshift(game.id);
-    recent.slice(12).forEach((old) => store.del(`game:${old}`));
-    store.set('games', recent.slice(0, 12));
+    // Keep the 12 newest games, plus today's daily however many games came after it.
+    const keep = recent.slice(0, 12);
+    if (recent.includes(dailyId()) && !keep.includes(dailyId())) keep.push(dailyId());
+    recent.filter((old) => !keep.includes(old)).forEach((old) => store.del(`game:${old}`));
+    store.set('games', keep);
   }
 
   function loadGame(id) {
     const saved = store.get(`game:${id}`, null);
     game = validGame(saved, id) ? saved : newGame(id);
+    epoch += 1;
+    disarmRestart();
     selected = null;
     focusIdx = 0;
     busy = false;
@@ -668,12 +684,15 @@
     sound('swap');
 
     const quick = reducedMotion();
+    const mine = epoch;
     setTimeout(() => {
+      if (mine !== epoch) return;
       markLines(res.steps[0]);
       floatScore(res.points, res.count, res.steps.length > 1);
       restartAnim(el.tiles, 'shake');
       sound('solve', res.count);
       setTimeout(() => {
+        if (mine !== epoch) return;
         busy = false;
         renderTiles();
         renderHeads();
@@ -739,6 +758,13 @@
   }
 
   let restartArmed = 0;
+  function disarmRestart() {
+    clearTimeout(restartArmed);
+    restartArmed = 0;
+    el.restartLbl.textContent = 'Restart';
+    el.restartBtn.classList.remove('armed');
+  }
+
   function onRestart() {
     if (busy) return;
     if (!game.used && !game.hints && game.shuffles === SHUFFLES) {
@@ -746,20 +772,12 @@
       return;
     }
     if (restartArmed) {
-      clearTimeout(restartArmed);
-      restartArmed = 0;
-      el.restartLbl.textContent = 'Restart';
-      el.restartBtn.classList.remove('armed');
       restartGame();
       return;
     }
     el.restartLbl.textContent = 'Tap to confirm';
     el.restartBtn.classList.add('armed');
-    restartArmed = setTimeout(() => {
-      restartArmed = 0;
-      el.restartLbl.textContent = 'Restart';
-      el.restartBtn.classList.remove('armed');
-    }, 3000);
+    restartArmed = setTimeout(disarmRestart, 3000);
   }
 
   function finishRound() {
@@ -767,7 +785,9 @@
     lastFinish = res;
     save();
     renderHud();
+    const mine = epoch;
     setTimeout(() => {
+      if (mine !== epoch) return;
       sound('finish');
       open('finish');
       if (res.newBest || (parseId(game.id).daily && res.replay == null && game.score > 0)) confetti(res.newBest ? 140 : 80);
@@ -954,7 +974,12 @@
   async function share() {
     const text = shareText();
     if (navigator.share && matchMedia('(pointer: coarse)').matches) {
-      try { await navigator.share({ text }); return; } catch { /* fall through to copy */ }
+      try {
+        await navigator.share({ text });
+        return;
+      } catch (e) {
+        if (e && e.name === 'AbortError') return; // the player closed the share sheet
+      }
     }
     toast((await copyText(text)) ? 'Result copied to clipboard.' : 'Could not copy. Try again.');
   }
@@ -988,7 +1013,11 @@
     focusIdx = to;
     doSwap(from, to);
   });
-  const endDrag = () => { drag = null; };
+  const endDrag = () => {
+    drag = null;
+    // A swipe's own click (if the browser sends one) fires right after pointerup.
+    if (swallowClick) setTimeout(() => { swallowClick = false; }, 0);
+  };
   window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
 
